@@ -1,0 +1,239 @@
+https://www.javatpoint.com/solid-principles-java
+
+0) Spring MVC    (Example being shown) You dont require this
+1) Spring Boot MVC  ( Yes required ) BootStrap
+2) Hibernate ( Standalone hibernate application)
+3) Spring Boot Console based application and Hibernate
+4) Spring Boot MVC and Hibernate 
+------------------------------------------------------------------------------
+Object Oriented Programming -------> Object Oriented Design
+-------------------------------------------------------------------
+Classes and objects
+objects association
+Features of Object Oriented Programming
+ * Encapsulation
+ * Abstraction
+ * Iheritance 
+ * Polymorphism
+----------------------------------------------------------------------------------
+Coupling=====> loosely coupled
+Cohesion=====> highly cohesive
+--------------------------------------------------------------------------------
+ In Java, SOLID principles are an object-oriented approach that are applied to software structure design. It is conceptualized by Robert C. Martin (also known as Uncle Bob). These five principles have changed the world of object-oriented programming, and also changed the way of writing software. It also ensures that the software is modular, easy to understand, debug, and refactor. In this section, we will discuss SOLID principles in Java with proper example.
+
+The word SOLID acronym for:
+?Single Responsibility Principle (SRP)
+?Open-Closed Principle (OCP)
+?Liskov Substitution Principle (LSP)
+?Interface Segregation Principle (ISP)
+?Dependency Inversion Principle (DIP)
+----------------------------------------------------------------------------------
+
+Single Responsibility Principle (SRP)
+
+
+The single responsibility principle states that every Java class must perform a single functionality.
+
+
+
+public class Student {
+    private int roll;
+    private String name;
+    private Result result;
+    private float percentage;
+    private char grade;
+    
+    setter/getters
+    equals/hashCode
+    toString()
+    public void storeData(){
+      Scanner scanner=new Scanner(System.in);
+      System.out.println("Enter the roll");
+       
+     }
+     public void dispData()
+      {
+           System.out.println("Roll"+roll);
+   
+   }
+  }
+----------------------------------------------------------------------------------------------------
+public class Result{
+ 
+    private float percentage;
+    private int scoreForSubject1;
+    private int scoreForSubject2;
+    private char grade;
+    setter/getter methods
+} 
+
+ public class Student {
+   private int roll;
+   private String name;
+   setter/getter method
+ }
+
+  public class StudentDataInputOutput
+   {
+      private Student student;
+       public void setStudent(Student student)
+        {
+         this.student=student;
+        }
+      
+        public void setStudentDetails()
+        {
+            Scanner scanner=new Scanner(System);
+            System.out.println("Enter student roll number");
+            student.setRoll(scanner.nextInt());
+   
+        }
+      
+       public void displayStudentDetails()
+        {
+           System.out.println(roll);
+        }
+
+   }
+
+
+  public class Main {
+      public static void main (String args[]) {
+       Student student=new Student();
+       StudentDataInputOutput sdio=new StudentDataInputOutput();
+       sdio.setStudent(student);
+       sdio.setStudentDetails();
+       sdio.displayStudentDetails()
+      }
+   }       
+--------------------------------------------------------------------------------------------------------
+Open-Closed Principle
+
+The application or module entities the methods, functions, variables, etc. The open-closed principle states that according to new requirements the module should be open for extension but closed for modification.
+public class Car{}
+public class Bus{}
+public class Truck{}
+
+public class VehicleInfo {
+
+    private Car car;
+    private Bus bus;
+    private Truck truck;
+
+     public VehicleInfo(Car car)
+     {
+
+     }
+
+      public VehicleInfo(Bus bus)
+      {
+
+      } 
+
+      public VehicleInfo(Truck bus)
+      {
+
+      } 
+
+     public long getVehicleNumberForCar()
+     {
+        
+     }
+
+     public long getVehicleNumberForBus()
+     {
+        
+     }
+
+  }
+
+   public class VehicleMain  {
+    public static void main(String str[])
+    {
+       Car car=new Car();
+       VehicleInfo vehicle1=new VehicleInfo(car);
+       System.out.println(car.getVehicleNumberForCar());
+       
+       Bus bus=new Bus();
+       VehicleInfo vehicle2=new VehicleInfo(bus);
+       System.out.println(car.getVehicleNumberForBus());
+ 
+    }
+
+
+---------------------------------------------------------------------------------
+ public abstract class Vehicle{
+
+       public abstract long getVehicleNumber(); //abstract
+       public void startengine()   // non abstract
+         {
+
+         }       
+
+      }
+ 
+    OR 
+
+ public interface Vehicle {
+    // when all the methods abstract prior java 8
+   }
+
+   public class Car extends Vehicle{  
+
+     public long getVehicleNumber()
+      {
+        return number;
+      }
+ }
+
+   OR
+
+   public class Car implements Vehicle {}    
+
+
+
+
+
+   public class Bus extends Vehicle{ 
+        public long getVehicleNumber()
+      {
+        return number;
+      }
+
+  }
+
+  OR
+
+  public class Bus implements Vehicle {}    
+
+ 
+
+   public class VehicleInfo  {
+
+        private Vehicle vehicle;
+  
+         public VehicleInfo(Vehicle vehicle)
+          {
+                this.vehicle=vehicle;
+          }       
+
+          public long getvehicleNumber() {
+              return vehicle.getVehicleNumber();
+        }    
+    
+    }
+   
+
+   public class Main {
+    public static void main(String args[])  
+     {
+          Vehicle vehicle=new Car();
+          VehicleInfo vi=new VehicleInfo(vehicle);    
+          System.out.println(vehicle.getVehicleNumber()); 
+          vehicle=new Bus();
+          vi=new VehicleInfo(vehicle);
+          System.out.println(vehicle.getVehicleNumber()); 
+ 
+     }
+   }
+  
